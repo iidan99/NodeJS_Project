@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="sign-in.css" />
+    <script src="./dist/sign-in.js" defer></script>
+
+    <title>Sign-In</title>
+  </head>
+  <body>
+    <h1>Sign-In</h1>
+
+    <form class="signin-form" onsubmit="createUser(event)">
+      <label>User Name</label>
+      <input name="userName" type="text" required />
+      <label>First Name</label>
+      <input name="firstName" type="text" required />
+      <label>Last Name</label>
+      <input name="lastName" type="text" required />
+      <label>Email</label>
+      <input name="email" type="email" required />
+      <label>Password</label>
+      <input name="password" type="password" required />
+      <label>Verify Password</label>
+      <input name="verifyPassword" type="password" required />
+      <div class="form_btn">
+        <button type="submit">Sign up</button>
+        <button type="button" onclick="back()">Back</button>
+      </div>
+    </form>
+  </body>
+</html>

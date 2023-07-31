@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./dist/main.js" defer></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>main</h1>
+    <form class="post-form" onsubmit="createPost(event)">
+      <h2>Create New Post</h2>
+      <textarea
+        name="description"
+        placeholder="Please Enter Post content"
+      ></textarea>
+      <div>
+        <button type="submit">Post</button>
+        <button onclick="resetForm()" type="button">Discard</button>
+      </div>
+    </form>
+
+    <div>
+      <div>
+        <p>User Name</p>
+        <p>Comment Date</p>
+      </div>
+      <span>This is comment</span>
+      <div>
+        <p>Reaction</p>
+      </div>
+    </div>
+    <button onclick="logOut()">LogOut</button>
+
+    <div class="posts-list"></div>
+  </body>
+</html>
