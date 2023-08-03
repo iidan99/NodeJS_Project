@@ -25,7 +25,6 @@ function getPosts() {
   fetch("/get-posts")
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       renderPosts(data);
     })
     .catch((error) => {
@@ -34,8 +33,6 @@ function getPosts() {
 }
 
 function getComments(post) {
-  console.log(post);
-
   let commentsData = [];
   fetch("/get-comments", {
     method: "PATCH",
@@ -55,8 +52,6 @@ function getComments(post) {
 }
 
 function renderPostToScreen(comment, post) {
-  console.log("this is :", comment, post);
-
   const commentsHtml = comment
     .map(
       (res) => `
@@ -86,7 +81,9 @@ function renderPostToScreen(comment, post) {
 }
 
 function deleteBtn(userID: string, commentID: string) {
-  if (userID === userLogin.userID) {
+  if (userLogin === null) {
+    logOut();
+  } else if (userID === userLogin.userID) {
     return `<button onclick=(deleteComment("${commentID}"))>Delete</button>`;
   }
   return "";

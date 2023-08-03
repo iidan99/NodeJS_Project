@@ -125,6 +125,7 @@
   flex-direction: column;
   margin: 0 auto;
   justify-content: center;
+  height: 80%;
 }
 .signin-container h1 {
   margin: 40px 0;
@@ -147,15 +148,14 @@
 .signin-container-form_btn {
   display: flex;
   flex-direction: column;
+  height: 140px;
+  justify-content: space-around;
 }
 .signin-container-form_btn--signin {
   background: linear-gradient(0.25turn, #64d6da, #a38ce6, #e345ed);
   height: 48px;
   border-radius: 30px;
   font-size: 1.5rem;
-}
-.signin-container-form_btn--signin:hover {
-  background: #0056b3;
 }
 .signin-container-form_btn--back {
   height: 48px;
@@ -223,4 +223,7 @@
 
 button {
   cursor: pointer;
+}
+button:hover {
+  background: #0056b3;
 }/*# sourceMappingURL=style.css.map */

@@ -60,4 +60,7 @@
 
 button {
   cursor: pointer;
+  &:hover {
+    background: #0056b3;
+  }
 }
