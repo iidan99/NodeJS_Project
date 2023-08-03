@@ -32,3 +32,13 @@ export const createPost = async (req: any, res: any) => {
     res.status(500).send("did not get any data");
   }
 };
+
+export const getPosts = async (req: any, res: any) => {
+  try {
+    const posts = await PostModal.find({}).sort({ date: -1 });
+    res.status(200).send({ send: "ok", postsList: posts });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("There is no Posts");
+  }
+};

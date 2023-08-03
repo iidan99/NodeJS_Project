@@ -36,77 +36,97 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.getPosts = exports.createPost = exports.getUser = void 0;
-var postsModal_1 = require("./postsModal");
-var postsModal_2 = require("./postsModal");
-exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, userName, password, user, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+exports.deleteComment = exports.createComment = exports.getComments = void 0;
+var commentsModal_1 = require("./commentsModal");
+var postsModal_1 = require("../posts/postsModal");
+var usersModal_1 = require("../users/usersModal");
+exports.getComments = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var postID, commentsList, error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
-                _a = req.body, userName = _a.userName, password = _a.password;
-                return [4 /*yield*/, postsModal_2["default"].findOne({
-                        userName: userName,
-                        password: password
+                _a.trys.push([0, 2, , 3]);
+                postID = req.body.postID;
+                return [4 /*yield*/, commentsModal_1["default"].find({ post_ID: postID }).sort({
+                        date: -1
                     })];
             case 1:
-                user = _b.sent();
-                console.log(user);
-                res.send({ user: user });
+                commentsList = _a.sent();
+                res.status(200).send({ status: "200", commentsList: commentsList });
                 return [3 /*break*/, 3];
             case 2:
-                error_1 = _b.sent();
+                error_1 = _a.sent();
                 console.log(error_1);
-                res.status(500).send("error");
+                res.status(500).send("There is no Data ");
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.createPost = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, userName, description, user_ID, post, postsList, error_2;
+exports.createComment = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, description, postID, userID, post, user, comment, commentList, error_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 3, , 4]);
-                _a = req.body, userName = _a.userName, description = _a.description, user_ID = _a.user_ID;
-                return [4 /*yield*/, postsModal_1["default"].create({
-                        userName: userName,
-                        description: description,
-                        user_ID: user_ID
-                    })];
+                _b.trys.push([0, 5, , 6]);
+                _a = req.body, description = _a.description, postID = _a.postID, userID = _a.userID;
+                console.log(description);
+                if (!description)
+                    throw new Error("There is no content");
+                if (!postID)
+                    throw new Error("There is no PostId");
+                return [4 /*yield*/, postsModal_1["default"].findById(postID)];
             case 1:
                 post = _b.sent();
-                return [4 /*yield*/, postsModal_1["default"].find({})];
+                if (!post)
+                    throw new Error("There is no post");
+                console.log(post);
+                return [4 /*yield*/, usersModal_1["default"].findById(userID)];
             case 2:
-                postsList = _b.sent();
-                res.send({ send: "ok", post: postsList });
-                return [3 /*break*/, 4];
+                user = _b.sent();
+                console.log(user);
+                if (!user)
+                    throw new Error("There is no user");
+                return [4 /*yield*/, commentsModal_1["default"].create({
+                        userName: user.userName,
+                        post_ID: post._id,
+                        user_ID: user._id,
+                        description: description
+                    })];
             case 3:
+                comment = _b.sent();
+                return [4 /*yield*/, commentsModal_1["default"].find({ post_ID: postID }).lean()];
+            case 4:
+                commentList = _b.sent();
+                res.status(200).send({ send: "od", commentList: commentList });
+                return [3 /*break*/, 6];
+            case 5:
                 error_2 = _b.sent();
                 console.log(error_2);
-                res.status(500).send("did not get any data");
-                return [3 /*break*/, 4];
-            case 4: return [2 /*return*/];
+                res.status(500).send("There is no data");
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); };
-exports.getPosts = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var posts, error_3;
+exports.deleteComment = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var commentID, commentDB, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, postsModal_1["default"].find({}).sort({ date: -1 })];
+                commentID = req.body.commentID;
+                if (!commentID)
+                    throw new Error("There is no Comment ID");
+                return [4 /*yield*/, commentsModal_1["default"].findByIdAndDelete(commentID)];
             case 1:
-                posts = _a.sent();
-                res.status(200).send({ send: "ok", postsList: posts });
+                commentDB = _a.sent();
+                res.status(200).send({ status: "ok" });
                 return [3 /*break*/, 3];
             case 2:
                 error_3 = _a.sent();
                 console.log(error_3);
-                res.status(500).send("There is no Posts");
+                res.status(500).send({ error: "There is no data" });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

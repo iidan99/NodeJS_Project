@@ -1,0 +1,47 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: gray;
+  max-width: 35%;
+  margin: 20px auto;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: right;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form_btn {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+.form_btn button {
+  width: 300px;
+  height: 25px;
+  background: gray;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}

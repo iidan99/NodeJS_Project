@@ -1,39 +1,95 @@
 const userLogin = JSON.parse(localStorage.getItem("user")!);
+const postHtml = document.querySelector(".posts-list") as HTMLDListElement;
 
+let commentsList = [];
+
+function resetForm() {
+  const form = document.querySelector(".post-form") as HTMLFormElement;
+  form.reset();
+}
+
+function renderPosts(data: []) {
+  data.postsList.map((res) => {
+    getComments(res);
+  });
+}
+
+getPosts();
 function logOut() {
   localStorage.removeItem("user");
   window.location.replace("../");
 }
 
-function renderPosts(data) {
-  const postHtml = document.querySelector(".posts-list") as HTMLDListElement;
-  postHtml.innerHTML = `<div>
-  <h3>${data.userName}</h3>
-  <p>${data.date}</p>
-  </div>
-  <div>
-  ${getComments(data.postID)}
-  </div>`;
+function getPosts() {
+  postHtml.innerHTML = "";
+  fetch("/get-posts")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      renderPosts(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
-function getComments(postID: string) {
+function getComments(post) {
+  console.log(post);
+
   let commentsData = [];
   fetch("/get-comments", {
-    method: "Patch",
+    method: "PATCH",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      postID: postID,
+      postID: post._id,
     }),
   }).then((res) =>
     res.json().then((data) => {
-      console.log(data);
-      commentsData = data;
+      commentsData = data.commentsList;
+      renderPostToScreen(commentsData, post);
     })
   );
-  return commentsData;
+}
+
+function renderPostToScreen(comment, post) {
+  console.log("this is :", comment, post);
+
+  const commentsHtml = comment
+    .map(
+      (res) => `
+    <div class="post-comment">
+    <h4>${res.userName}</h4>
+    <p>${res.description}</p>
+    <p>${res.date}</p>
+    ${deleteBtn(res.user_ID, res._id)}
+    </div>`
+    )
+    .join("");
+
+  postHtml.innerHTML += `<div class="post">
+    <h3>${post.userName}</h3>
+    <p>${post.date}</p>
+    <div>${post.description}</div>
+    <div>  
+    <p>Comments</p>
+    <div>
+   ${commentsHtml}
+    </div>
+    <form onsubmit="addComment(event, '${post._id}')">
+    <textarea name="description" placeholder="Add Comment"></textarea>
+    <button type="submit">send</button>
+    </form>
+    </div>`;
+}
+
+function deleteBtn(userID: string, commentID: string) {
+  if (userID === userLogin.userID) {
+    return `<button onclick=(deleteComment("${commentID}"))>Delete</button>`;
+  }
+  return "";
 }
 
 function createPost(event) {
@@ -56,7 +112,7 @@ function createPost(event) {
     })
       .then((res) => res.json())
       .then(({ data }) => {
-        console.log(data);
+        getPosts();
       })
       .catch((error) => {
         console.log(error);
@@ -65,7 +121,47 @@ function createPost(event) {
   }
 }
 
-function resetForm() {
-  const form = document.querySelector(".post-form") as HTMLFormElement;
-  form.reset();
+function addComment(event, postId) {
+  event.preventDefault();
+  const description = event.target.elements.description.value;
+
+  fetch("/create-comment", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      description: description,
+      postID: postId,
+      userID: userLogin.userID,
+    }),
+  }).then((res) =>
+    res
+      .json()
+      .then((data) => {
+        getPosts();
+      })
+      .catch((error) => {})
+  );
+}
+
+function deleteComment(commentID: string) {
+  fetch("/delete-comment", {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      commentID,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      getPosts();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }

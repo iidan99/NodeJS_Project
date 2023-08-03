@@ -1,0 +1,9 @@
+@import "./main/main.scss";
+@import "./login/_sign-in.scss";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}

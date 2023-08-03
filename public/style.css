@@ -1,0 +1,96 @@
+/* Reset some default styles */
+.posts-list {
+  display: grid;
+  gap: 20px;
+}
+
+.post {
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 10px;
+  width: 600px;
+  margin: 0 auto;
+  background-color: #242526;
+  color: #e4e6eb;
+}
+.post-comment {
+  background-color: gray;
+  border-radius: 15px;
+  padding: 15px;
+  color: white;
+}
+
+/* Individual post element styles */
+h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+div {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: none;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form_btn {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}
+.form_btn button {
+  width: 300px;
+  height: 25px;
+  background: gray;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}/*# sourceMappingURL=style.css.map */
