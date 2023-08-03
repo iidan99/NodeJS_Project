@@ -27,7 +27,6 @@ function handleLogin(event) {
                 throw new Error("There is no data");
             localStorage.setItem("user", JSON.stringify({
                 name: user.userName,
-                password: user.password,
                 userID: user._id,
                 date: new Date()
             }));
