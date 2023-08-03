@@ -9,25 +9,37 @@
     <title>Sign-In</title>
   </head>
   <body>
-    <h1>Sign-In</h1>
-
-    <form class="signin-form" onsubmit="createUser(event)">
-      <label>User Name</label>
-      <input name="userName" type="text" required />
-      <label>First Name</label>
-      <input name="firstName" type="text" required />
-      <label>Last Name</label>
-      <input name="lastName" type="text" required />
-      <label>Email</label>
-      <input name="email" type="email" required />
-      <label>Password</label>
-      <input name="password" type="password" required />
-      <label>Verify Password</label>
-      <input name="verifyPassword" type="password" required />
-      <div class="form_btn">
-        <button type="submit">Sign up</button>
-        <button type="button" onclick="back()">Back</button>
+    <div class="signin">
+      <div class="signin-container">
+        <h1>Sign-In</h1>
+        <form class="signin-container-form" onsubmit="createUser(event)">
+          <label>User Name</label>
+          <input name="userName" type="text" required />
+          <label>First Name</label>
+          <input name="firstName" type="text" required />
+          <label>Last Name</label>
+          <input name="lastName" type="text" required />
+          <label>Email</label>
+          <input name="email" type="email" required />
+          <label>Password</label>
+          <input name="password" type="password" required />
+          <label>Verify Password</label>
+          <input name="verifyPassword" type="password" required />
+          <p class="signin-container-form--error"></p>
+          <div class="signin-container-form_btn">
+            <button class="signin-container-form_btn--signin" type="submit">
+              Create Account
+            </button>
+            <button
+              class="signin-container-form_btn--back"
+              type="button"
+              onclick="back()"
+            >
+              Login
+            </button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </body>
 </html>

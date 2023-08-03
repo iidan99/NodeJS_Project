@@ -7,32 +7,31 @@
     <link rel="stylesheet" href="../style.css" />
     <title>Document</title>
   </head>
-  <body>
-    <h1>main</h1>
-    <form class="post-form" onsubmit="createPost(event)">
-      <h2>Create New Post</h2>
-      <textarea
-        name="description"
-        placeholder="Please Enter Post content"
-      ></textarea>
-      <div>
-        <button type="submit">Post</button>
-        <button onclick="resetForm()" type="button">Discard</button>
-      </div>
-    </form>
-
+  <body class="container">
     <div>
-      <div>
-        <p>User Name</p>
-        <p>Comment Date</p>
+      <div class="post">
+        <h1>main</h1>
+        <form class="post-form" onsubmit="createPost(event)">
+          <h2>Create New Post</h2>
+          <textarea
+            name="description"
+            placeholder="Please Enter Post content"
+          ></textarea>
+          <div class="post-form-btn">
+            <button class="post-form--post" type="submit">Post</button>
+            <button
+              class="post-form--discard"
+              onclick="resetForm()"
+              type="button"
+            >
+              Discard
+            </button>
+          </div>
+        </form>
       </div>
-      <span>This is comment</span>
-      <div>
-        <p>Reaction</p>
-      </div>
-    </div>
-    <button onclick="logOut()">LogOut</button>
+      <button class="logout-btn" onclick="logOut()">LogOut</button>
 
-    <div class="posts-list"></div>
+      <div class="posts-list"></div>
+    </div>
   </body>
 </html>

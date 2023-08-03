@@ -60,7 +60,7 @@ function renderPostToScreen(comment, post) {
   const commentsHtml = comment
     .map(
       (res) => `
-    <div class="post-comment">
+    <div class="post-comment-container-data">
     <h4>${res.userName}</h4>
     <p>${res.description}</p>
     <p>${res.date}</p>
@@ -73,12 +73,12 @@ function renderPostToScreen(comment, post) {
     <h3>${post.userName}</h3>
     <p>${post.date}</p>
     <div>${post.description}</div>
-    <div>  
+    <div class="post-comment">  
     <p>Comments</p>
-    <div>
+    <div class="post-comment-container"> 
    ${commentsHtml}
     </div>
-    <form onsubmit="addComment(event, '${post._id}')">
+    <form class="post-comment-form" onsubmit="addComment(event, '${post._id}')">
     <textarea name="description" placeholder="Add Comment"></textarea>
     <button type="submit">send</button>
     </form>

@@ -48,9 +48,9 @@ function getComments(post) {
 function renderPostToScreen(comment, post) {
     console.log("this is :", comment, post);
     var commentsHtml = comment
-        .map(function (res) { return "\n    <div class=\"post-comment\">\n    <h4>" + res.userName + "</h4>\n    <p>" + res.description + "</p>\n    <p>" + res.date + "</p>\n    " + deleteBtn(res.user_ID, res._id) + "\n    </div>"; })
+        .map(function (res) { return "\n    <div class=\"post-comment-container-data\">\n    <h4>" + res.userName + "</h4>\n    <p>" + res.description + "</p>\n    <p>" + res.date + "</p>\n    " + deleteBtn(res.user_ID, res._id) + "\n    </div>"; })
         .join("");
-    postHtml.innerHTML += "<div class=\"post\">\n    <h3>" + post.userName + "</h3>\n    <p>" + post.date + "</p>\n    <div>" + post.description + "</div>\n    <div>  \n    <p>Comments</p>\n    <div>\n   " + commentsHtml + "\n    </div>\n    <form onsubmit=\"addComment(event, '" + post._id + "')\">\n    <textarea name=\"description\" placeholder=\"Add Comment\"></textarea>\n    <button type=\"submit\">send</button>\n    </form>\n    </div>";
+    postHtml.innerHTML += "<div class=\"post\">\n    <h3>" + post.userName + "</h3>\n    <p>" + post.date + "</p>\n    <div>" + post.description + "</div>\n    <div class=\"post-comment\">  \n    <p>Comments</p>\n    <div class=\"post-comment-container\"> \n   " + commentsHtml + "\n    </div>\n    <form class=\"post-comment-form\" onsubmit=\"addComment(event, '" + post._id + "')\">\n    <textarea name=\"description\" placeholder=\"Add Comment\"></textarea>\n    <button type=\"submit\">send</button>\n    </form>\n    </div>";
 }
 function deleteBtn(userID, commentID) {
     if (userID === userLogin.userID) {

@@ -3,21 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
     <script src="./dist/index.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Login</title>
   </head>
   <body>
-    <form onsubmit="handleLogin(event)">
-      <p class="error-message"></p>
-      <lable>User Name</lable>
-      <input type="text" name="userName" />
-      <label>Password</label>
-      <input type="password" name="password" />
-      <div>
-        <button type="submit">Login</button>
-        <a href="./login/sign-in.html">Sign-In</a>
-        <a href="./main/main.html">main</a>
+    <div class="login">
+      <div class="login-container">
+        <h1 class="login-container-header">Login</h1>
+        <form class="login-container-form" onsubmit="handleLogin(event)">
+          <p class="error-message"></p>
+          <lable>User Name</lable>
+          <input
+            class="login-container-form-input"
+            type="text"
+            name="userName"
+          />
+          <label>Password</label>
+          <input
+            class="login-container-form-input"
+            type="password"
+            name="password"
+          />
+          <div class="login-container-form-btn">
+            <button class="login-container-form-btn--login" type="submit">
+              Login
+            </button>
+            <a
+              class="login-container-form-btn--signup"
+              href="./login/sign-in.html"
+              >SIGN UP</a
+            >
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </body>
 </html>
